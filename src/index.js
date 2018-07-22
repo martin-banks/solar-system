@@ -24,8 +24,8 @@ scene.add(camera)
 
 
 const lights = {
-  ambient: new THREE.AmbientLight('#fff', 0.1),
-  sun: new THREE.PointLight('#fff', 1),
+  ambient: new THREE.AmbientLight('#fff', 0.07),
+  sun: new THREE.PointLight('#fff', 1, 350, 1),
 }
 
 scene.add(lights.ambient)
@@ -50,14 +50,14 @@ const loaders = {
 const textures = {
   universe: loaders.texture.load('./textures/stars_milky_way_2k.jpg'),
   sun: loaders.texture.load('./textures/sun_2k.jpg'),
-  mercury: loaders.texture.load('./textures/mercury_2k.jpg'),
-  venus: loaders.texture.load('./textures/venus_2k.jpg'),
-  earth: {
-    land: loaders.texture.load('./textures/earth_daymap_2k.jpg'),
-    clouds: loaders.texture.load('./textures/earth_clouds_2k.jpg'),
-  },
-  saturn: loaders.texture.load('./textures/saturn_2k.jpg'),
-  saturnRings: loaders.texture.load('./textures/saturn_ring_alt.png'),
+  // mercury: loaders.texture.load('./textures/mercury_2k.jpg'),
+  // venus: loaders.texture.load('./textures/venus_2k.jpg'),
+  // earth: {
+  //   land: loaders.texture.load('./textures/earth_daymap_2k.jpg'),
+  //   clouds: loaders.texture.load('./textures/earth_clouds_2k.jpg'),
+  // },
+  // saturn: loaders.texture.load('./textures/saturn_2k.jpg'),
+  // saturnRings: loaders.texture.load('./textures/saturn_ring_alt.png'),
 }
 
 
@@ -71,7 +71,7 @@ const universe = new THREE.Mesh(
 universe.scale.x = -1
 
 const sun = new THREE.Mesh(
-  new THREE.SphereGeometry(20, 15, 15),
+  new THREE.SphereGeometry(20, 50, 50),
   new THREE.MeshBasicMaterial({
     color: '#ff0',
     map: textures.sun,
@@ -147,7 +147,7 @@ scene.add(universe)
 scene.add(sun)
 
 const controls = new THREE.OrbitControls(camera)
-
+const speed = 0.05
 function update () {
   const cameraInfo = {
     position: {
@@ -165,14 +165,17 @@ function update () {
   dump.innerText = JSON.stringify(cameraInfo, 'utf-8', 2)
   renderer.render(scene, camera)
   requestAnimationFrame(update)
-  sun.rotation.y += 0.001
+  sun.rotation.y += speed / 27
+  universe.rotation.y += 0.0001
+  universe.rotation.x += 0.0001
+  universe.rotation.z += 0.00005
   
   Object.keys(planets).forEach(k => {
     const planet = planetData.filter(p => p.name === k)[0].planet
-    planets[k].planet.rotation.y += planet.spin
+    planets[k].planet.rotation.y += speed / planet.spin
     if (planet.orbit >= 360) planet.orbit = 0
 
-    planet.orbit += planet.orbitSpeed
+    planet.orbit += speed / (planet.orbitSpeed)
     planets[k].planet.position.x = planet.x * Math.sin(planet.orbit)
     planets[k].planet.position.z = planet.x * Math.cos(planet.orbit)
   })

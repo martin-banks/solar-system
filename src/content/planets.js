@@ -1,3 +1,25 @@
+// day length hours            24/hours (days)
+// Mercury   1,408 hours       56.6
+// Venus     5,832 hours       242.5
+// Earth     24 hours          1
+// Mars      25 hours          1.04
+// Jupiter   10 hours          0.42
+// Saturn    11 hours          0.46
+// Uranus    17 hours          0.71
+// Neptune   16 hours          0.67
+// Pluto     153.3 hours       6.39
+
+//             days             earth years
+// Mercury     87.97 days       0.2
+// Venus       224.70 days      0.6
+// Earth       365.26 days      1
+// Mars        686.98 days      1.9
+// Jupiter     4,332.82 days    11.9
+// Saturn      10,755.70 days   29.5
+// Uranus      30,687.15 days   84
+// Neptune     60,190.03 days   164.8
+// Pluto                        248
+
 export default [
   {
     name: 'mercury',
@@ -6,9 +28,9 @@ export default [
       y: 0,
       z: 0,
       r: 10,
-      spin: 0.01,
+      spin: 56.6,
       orbit: 0,
-      orbitSpeed: 0.03,
+      orbitSpeed: 0.2 * 365,
       color: '',
       map: 'mercury_2k.jpg',
       bumpMap: 'mercury_2k.jpg',
@@ -29,9 +51,9 @@ export default [
       y: 0,
       z: 0,
       r: 10,
-      spin: 0.01,
+      spin: 242.5,
       orbit: 0,
-      orbitSpeed: 0.02,
+      orbitSpeed: 0.6 * 365,
       color: '',
       map: 'venus_2k.jpg',
       bumpMap: 'venus_2k.jpg',
@@ -53,9 +75,9 @@ export default [
       y: 0,
       z: 0,
       r: 10,
-      spin: 0.01,
+      spin: 1,
       orbit: 0,
-      orbitSpeed: 0.01,
+      orbitSpeed: 1 * 365,
       color: '',
       map: 'earth_daymap_2k.jpg',
       bumpMap: 'earth_daymap_2k.jpg',
@@ -95,9 +117,9 @@ export default [
       y: 0,
       z: 0,
       r: 10,
-      spin: 0.01,
+      spin: 1.04,
       orbit: 0,
-      orbitSpeed: 0.008,
+      orbitSpeed: 1.9 * 365,
       color: '',
       map: 'mars_2k.jpg',
       bumpMap: 'mars_2k.jpg',
@@ -118,9 +140,9 @@ export default [
       y: 0,
       z: 0,
       r: 10,
-      spin: 0.01,
+      spin: 0.42,
       orbit: 0,
-      orbitSpeed: 0.003,
+      orbitSpeed: 11.9 * 365,
       color: '',
       map: 'jupiter_2k.jpg',
       // bumpMap: 'jupiter_2k.jpg',
@@ -141,9 +163,9 @@ export default [
       y: 0,
       z: 0,
       r: 10,
-      spin: 0.01,
+      spin: 0.46,
       orbit: 0,
-      orbitSpeed: 0.001,
+      orbitSpeed: 29.5 * 365,
       color: '',
       map: 'saturn_2k.jpg',
       bumpMap: false,
@@ -179,9 +201,9 @@ export default [
       y: 0,
       z: 0,
       r: 10,
-      spin: 0.01,
+      spin: 0.71,
       orbit: 0,
-      orbitSpeed: 0.0008,
+      orbitSpeed: 84 * 365,
       color: '',
       map: 'uranus_2k.jpg',
       bumpMap: false,
@@ -202,9 +224,9 @@ export default [
       y: 0,
       z: 0,
       r: 10,
-      spin: 0.01,
+      spin: 0.67,
       orbit: 0,
-      orbitSpeed: 0.0004,
+      orbitSpeed: 164.8 * 365,
       color: '',
       map: 'neptune_2k.jpg',
       bumpMap: false,
@@ -226,9 +248,9 @@ export default [
       y: 0,
       z: 0,
       r: 10,
-      spin: 0.01,
+      spin: 6.39,
       orbit: 0,
-      orbitSpeed: 0.001,
+      orbitSpeed: 248 * 365,
       color: '',
       map: 'pluto_2k.jpg',
       bumpMap: 'pluto_bump_2k.jpg',
