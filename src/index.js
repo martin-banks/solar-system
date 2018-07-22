@@ -20,11 +20,11 @@ scene.add(camera)
 // scene.position.x = window.innerWidth / 2 
 camera.position.x = 21
 camera.position.y = 15
-camera.position.z = 60
+camera.position.z = 200
 
-camera.rotation.x = -0.59
-camera.rotation.y = -0.46
-camera.rotation.z = -0.38
+// camera.rotation.x = -0.59
+// camera.rotation.y = -0.46
+// camera.rotation.z = -0.38
 
 const lights = {
   ambient: new THREE.AmbientLight('#fff', 0.1),
@@ -265,6 +265,20 @@ function update () {
   renderer.render(scene, camera)
   requestAnimationFrame(update)
   sun.rotation.y += 0.001
+  
+  Object.keys(planets).forEach(k => {
+    const planet = planetData.filter(p => p.name === k)[0].planet
+    planets[k].planet.rotation.y += planet.spin
+    if (planet.orbit >= 360) planet.orbit = 0
+
+    // planet.orbit += 
+    // console.log(Math.sin(planet.orbitSpeed))
+    planet.orbit += planet.orbitSpeed
+    planets[k].planet.position.x = planet.x * Math.sin(planet.orbit)
+    planets[k].planet.position.z = planet.x * Math.cos(planet.orbit)
+
+  })
+  // console.log('----')
   // mercury.rotation.y += 0.003
   // venus.rotation.y += 0.003
   // earth.land.rotation.y += 0.0005
@@ -277,6 +291,7 @@ function update () {
   //   orbits.venus = 0
   //   orbits.saturn = 0
   // } 
+
   // orbit += 0.01
   // orbits.venus += 0.002
   // orbits.earth += 0.001
