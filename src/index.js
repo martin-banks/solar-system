@@ -1,8 +1,6 @@
 "use strict"
 import planetData from './content/planets.js'
 
-// import makeApp from './scripts/makeapp.js'
-// makeApp()
 const dump = document.querySelector('pre.dump')
 
 function angle (degree) {
@@ -16,15 +14,14 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100000
 )
-scene.add(camera)
-// scene.position.x = window.innerWidth / 2 
 camera.position.x = 21
 camera.position.y = 15
 camera.position.z = 200
+camera.rotation.x = -0.59
+camera.rotation.y = -0.46
+camera.rotation.z = -0.38
+scene.add(camera)
 
-// camera.rotation.x = -0.59
-// camera.rotation.y = -0.46
-// camera.rotation.z = -0.38
 
 const lights = {
   ambient: new THREE.AmbientLight('#fff', 0.1),
@@ -71,7 +68,6 @@ const universe = new THREE.Mesh(
     map: textures.universe,
   })
 )
-// universe.position.x = -50
 universe.scale.x = -1
 
 const sun = new THREE.Mesh(
@@ -147,106 +143,11 @@ Object.keys(planets).forEach(k => {
   }
 })
 
-// scene.add(planets.mercury.planet)
-
-// const mercury = new THREE.Mesh(
-//   new THREE.SphereBufferGeometry(5, 15, 15),
-//   new THREE.MeshPhongMaterial({
-//     color: '#fff',
-//     shininess: 0,
-//     map: textures.mercury,
-//     bumpMap: textures.mercury,
-//     bumpScale: 0.4,
-//   })
-// )
-
-// const venus = new THREE.Mesh(
-//   new THREE.SphereBufferGeometry(7, 15, 15),
-//   new THREE.MeshPhongMaterial({
-//     color: '#fff',
-//     shininess: 0,
-//     map: textures.venus,
-//     bumpMap: textures.venus,
-//     bumpScale: 0.4,
-//   })
-// )
-
-// const earth = {
-//   land: new THREE.Mesh(
-//     new THREE.SphereBufferGeometry(11, 20, 20),
-//     new THREE.MeshPhongMaterial({
-//       color: '#fff',
-//       map: textures.earth.land,
-//     })
-//   ),
-//   cloud: new THREE.Mesh(
-//     new THREE.SphereBufferGeometry(11.5, 20, 20),
-//     new THREE.MeshPhongMaterial({
-//       color: '#fff',
-//       alphaMap: textures.earth.clouds,
-//       transparent: true,
-//       // opacity: 0.1
-//     })
-//   ),
-// }
-
-
-
-
-
-
-// const saturn = new THREE.Mesh(
-//   new THREE.SphereBufferGeometry(15, 20, 20),
-//   new THREE.MeshPhongMaterial({
-//     color: '#ddd',
-//     map: textures.saturn,
-//   })
-// )
-// saturn.castShadow = true
-
-
-// const ringGeometry = new THREE.XRingGeometry(1.2 * 15, 2 * 15, 2 * 32, 5, 0, Math.PI * 2)
-// const saturnRings = new THREE.Mesh(
-//   ringGeometry,
-//   new THREE.MeshBasicMaterial({
-//     // color: 0xffff00,
-//     map: textures.saturnRings,
-//     side: THREE.DoubleSide,
-//     transparent: true,
-//     opacity: 1
-//   })
-// )
-// saturnRings.receiveShadow = true
-
-
 scene.add(universe)
 scene.add(sun)
-// scene.add(mercury)
-// scene.add(venus)
-// scene.add(saturn)
-// scene.add(earth.land)
-// earth.land.add(earth.cloud)
-// saturn.add(saturnRings)
-
-// mercury.position.x = 40
-// venus.position.x = 100
-// earth.land.position.x = 120
-// saturn.position.x = 150
-// saturnRings.rotation.x = angle(60)
-
-
 
 const controls = new THREE.OrbitControls(camera)
 
-
-// let orbit = 0
-// const orbits = {
-//   venus: 0,
-//   saturn: 1,
-//   earth: 3
-// }
-
-let direction = 1
 function update () {
   const cameraInfo = {
     position: {
@@ -271,43 +172,11 @@ function update () {
     planets[k].planet.rotation.y += planet.spin
     if (planet.orbit >= 360) planet.orbit = 0
 
-    // planet.orbit += 
-    // console.log(Math.sin(planet.orbitSpeed))
     planet.orbit += planet.orbitSpeed
     planets[k].planet.position.x = planet.x * Math.sin(planet.orbit)
     planets[k].planet.position.z = planet.x * Math.cos(planet.orbit)
-
   })
-  // console.log('----')
-  // mercury.rotation.y += 0.003
-  // venus.rotation.y += 0.003
-  // earth.land.rotation.y += 0.0005
-  // earth.cloud.rotation.y -= 0.003
-  // earth.cloud.rotation.y += 0.001
-  // saturn.rotation.y += 0.003
 
-  // if (orbit >= 360) {
-  //   orbit = 0
-  //   orbits.venus = 0
-  //   orbits.saturn = 0
-  // } 
-
-  // orbit += 0.01
-  // orbits.venus += 0.002
-  // orbits.earth += 0.001
-  // orbits.saturn += 0.001
-
-  // mercury.position.x = 50 * Math.sin(orbit)
-  // mercury.position.z = 50 * Math.cos(orbit)
-
-  // venus.position.x = 100 * Math.sin(orbits.venus)
-  // venus.position.z = 100 * Math.cos(orbits.venus)
-
-  // earth.land.position.x = 120 * Math.sin(orbits.earth)
-  // earth.land.position.z = 120 * Math.cos(orbits.earth)
-
-  // saturn.position.x = 150 * Math.sin(orbits.saturn)
-  // saturn.position.z = 150 * Math.cos(orbits.saturn)
 }
 
 update()
