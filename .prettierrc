@@ -1,0 +1,10 @@
+# https://prettier.io/docs/en/options.html
+{
+  "semi": false,
+  "tabs": false,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "jsxBrackets": true,
+  "printWidth": 120
+}
