@@ -176,7 +176,7 @@ export default [
       shininess: 0,
     },
     layers: false,
-    rings: {
+    rings: [{
       x: 0,
       y: 0,
       z: 0,
@@ -185,14 +185,14 @@ export default [
       spin: 0,
       orbit: 0,
       color: '',
-      map: 'saturn_rings_2k.jpg',
+      map: 'saturn_ring_alt.png',
       bumpMap: false,
       bumpScale: 0,
       transparent: true,
       alphaMap: false,
       opacity: 1,
       shininess: 0,
-    },
+    }],
   },
   {
     name: 'uranus',

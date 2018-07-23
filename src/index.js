@@ -71,7 +71,7 @@ const sun = new THREE.Mesh(
 )
 
 const planets = planetData.reduce((output, p) => {
-  const { name, planet, layers } = p
+  const { name, planet, layers, rings } = p
   const { r , x, y, z } = planet
   let update = output
 
@@ -89,8 +89,7 @@ const planets = planetData.reduce((output, p) => {
     })
   )
 
-  let createLayers = !layers ? null : layers.reduce((allLayers, l) => {
-    console.log('this layer', l)
+  const createLayers = !layers ? null : layers.reduce((allLayers, l) => {
     let layerOutput = allLayers
     layerOutput[l.name] = new THREE.Mesh(
       new THREE.SphereGeometry(r * l.r, 50, 50),
@@ -108,12 +107,32 @@ const planets = planetData.reduce((output, p) => {
     return layerOutput
   }, {})
 
-  console.log({ createLayers })
+  const createRings = !rings ? null : rings.reduce((allRings, ring, i) => {
+    const { inner, outer, map } = ring
+    console.log({ ring })
+    const ringOutput = allRings
+    const newRing = new THREE.Mesh(
+      new THREE.XRingGeometry(r * inner, r * outer, 100),
+      new THREE.MeshBasicMaterial({
+        color: ring.color,
+        map: ring.map ? loaders.texture.load(`./textures/${ring.map}`) : null,
+        transparent: true,
+        side: THREE.DoubleSide,
+      })
+    )
+    newRing.rotation.x = angle(10)
+    ringOutput[`ring-${i}`] = newRing
+    
+    return ringOutput
+  }, {})
+
+  console.log({ createRings })
 
   createPlanet.position.set(x, y, z)
   update[name] = {
     planet: createPlanet,
     layers : createLayers,
+    rings: createRings,
   }
 
   return update
@@ -124,13 +143,23 @@ console.log({ planets })
 
 Object.keys(planets).forEach(k => {
   const p = planets[k]
+  // console.log(p.planet)
+  // console.log('rings', p.rings)
   scene.add(p.planet)
   if (p.layers) {
     const { layers } = p
     console.log({ layers })
-    Object.keys(layers).forEach(k => {
-      console.log(layers[k])
-      p.planet.add(layers[k])
+    Object.keys(layers).forEach(l => {
+      console.log(layers[l])
+      p.planet.add(layers[l])
+    })
+  }
+  if (p.rings) {
+    const { rings } = p
+    console.log({ rings })
+    Object.keys(rings).forEach(r => {
+      console.log(rings[r])
+      p.planet.add(rings[r])
     })
   }
 })
