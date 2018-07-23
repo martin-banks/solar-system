@@ -116,6 +116,7 @@ const planets = planetData.reduce((output, p) => {
       new THREE.MeshBasicMaterial({
         color: ring.color,
         map: ring.map ? loaders.texture.load(`./textures/${ring.map}`) : null,
+        // alphaMap: ring.alphsMap ? loaders.texture.load(`./textures/${ring.alphaMap}`) : null,
         transparent: true,
         side: THREE.DoubleSide,
       })
