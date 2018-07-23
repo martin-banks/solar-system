@@ -50,14 +50,6 @@ const loaders = {
 const textures = {
   universe: loaders.texture.load('./textures/stars_milky_way_2k.jpg'),
   sun: loaders.texture.load('./textures/sun_2k.jpg'),
-  // mercury: loaders.texture.load('./textures/mercury_2k.jpg'),
-  // venus: loaders.texture.load('./textures/venus_2k.jpg'),
-  // earth: {
-  //   land: loaders.texture.load('./textures/earth_daymap_2k.jpg'),
-  //   clouds: loaders.texture.load('./textures/earth_clouds_2k.jpg'),
-  // },
-  // saturn: loaders.texture.load('./textures/saturn_2k.jpg'),
-  // saturnRings: loaders.texture.load('./textures/saturn_ring_alt.png'),
 }
 
 
