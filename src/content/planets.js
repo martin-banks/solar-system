@@ -108,6 +108,28 @@ export default [
       },
     ],
     rings: false,
+    satelites: [
+      {
+        name: 'moon',
+        x: 20,
+        y: 0,
+        z: 0,
+        r: 2,
+        spin: 1,
+        orbit: 0,
+        orbitSpeed: 1 * 365,
+        color: '',
+        map: 'moon_2k.jpg',
+        bumpMap: 'moon_2k.jpg',
+        // bumpMap: true,
+        bumpScale: 0.4,
+        transparent: false,
+        alphaMap: false,
+        opacity: 1,
+        shininess: 0,
+        
+      },
+    ],
   },
 
   {

@@ -71,7 +71,7 @@ const sun = new THREE.Mesh(
 )
 
 const planets = planetData.reduce((output, p) => {
-  const { name, planet, layers, rings } = p
+  const { name, planet, layers, rings, satelites } = p
   const { r , x, y, z } = planet
   let update = output
 
@@ -109,7 +109,6 @@ const planets = planetData.reduce((output, p) => {
 
   const createRings = !rings ? null : rings.reduce((allRings, ring, i) => {
     const { inner, outer, map } = ring
-    console.log({ ring })
     const ringOutput = allRings
     const newRing = new THREE.Mesh(
       new THREE.XRingGeometry(r * inner, r * outer, 100),
@@ -121,19 +120,38 @@ const planets = planetData.reduce((output, p) => {
         side: THREE.DoubleSide,
       })
     )
-    newRing.rotation.x = angle(10)
+    // newRing.rotation.x = angle(10)
     ringOutput[`ring-${i}`] = newRing
     
     return ringOutput
   }, {})
 
-  console.log({ createRings })
+  const createSatelites = !satelites ? null : satelites.reduce((allSatelites, satelite, i) => {
+    const { inner, outer, map } = satelite
+    const sateliteOutput = allSatelites
+    const newSatelite = new THREE.Mesh(
+      new THREE.SphereGeometry(satelite.r, 100),
+      new THREE.MeshPhongMaterial({
+        color: satelite.color || '#fff',
+        map: satelite.map ? loaders.texture.load(`./textures/${satelite.map}`) : null,
+        bumpMap: satelite.alphsMap ? loaders.texture.load(`./textures/${satelite.alphaMap}`) : null,
+        bumpScale: 0.3,
+      })
+    )
+    // newsatelite.rotation.x = angle(10)
+    sateliteOutput[`satelite-${i}`] = newSatelite
+    newSatelite.position.x = satelite.x
+    return sateliteOutput
+  }, {})
+
+
 
   createPlanet.position.set(x, y, z)
   update[name] = {
     planet: createPlanet,
     layers : createLayers,
     rings: createRings,
+    satelites: createSatelites,
   }
 
   return update
@@ -144,8 +162,6 @@ console.log({ planets })
 
 Object.keys(planets).forEach(k => {
   const p = planets[k]
-  // console.log(p.planet)
-  // console.log('rings', p.rings)
   scene.add(p.planet)
   if (p.layers) {
     const { layers } = p
@@ -163,6 +179,15 @@ Object.keys(planets).forEach(k => {
       p.planet.add(rings[r])
     })
   }
+  if (p.satelites) {
+    const { satelites } = p
+    console.log({ satelites })
+    Object.keys(satelites).forEach(s => {
+      console.log(satelites[s])
+      p.planet.add(satelites[s])
+    })
+  }
+  
 })
 
 scene.add(universe)
